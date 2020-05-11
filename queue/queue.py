@@ -17,44 +17,51 @@ Stretch: What if you could only use instances of your Stack class to implement t
 from singly_linked_list import LinkedList
 
 
-# class Queue:
-#     ### implementing a queue using a list
-#     def __init__(self):
-#         self.size = 0
-#         self.storage = list()
-
-#     def __len__(self):
-#         ### gets size of queue
-#         return len(self.storage)
-
-#     def enqueue(self, value):
-#         ### enqueue an item at the rear
-#         self.storage.insert(0, value)
-
-#     def dequeue(self):
-#         ### dequeue an item from front
-#         if len(self.storage) > 0:
-#             return self.storage.pop()
-#         return None
-
 class Queue:
-    # linked list
+    # implementing a queue using a list
     def __init__(self):
         self.size = 0
-        self.storage = LinkedList()
+        self.storage = []
 
     def __len__(self):
         # gets size of queue
         return self.size
 
     def enqueue(self, value):
-        # enqueue an item at the rear (back) of list (furthest to the left)
+        # enqueue an item at the rear
+        self.storage.append(value)
         self.size += 1
-        self.storage.add_to_tail(value)
 
     def dequeue(self):
-        # dequeue an item from front of list (furthest to the right)
+        # dequeue an item from front
         if self.size > 0:
+
+            item_to_dequeue = self.storage[0]
+
+            self.storage = self.storage[1:]
+
             self.size -= 1
-            return self.storage.remove_head()
-        return None
+            return item_to_dequeue
+
+# class Queue:
+#     # linked list
+#     def __init__(self):
+#         self.size = 0
+#         self.storage = LinkedList()
+
+#     def __len__(self):
+#         # gets size of queue
+#         return self.size
+
+#     def enqueue(self, value):
+#         # enqueue an item at the rear (back) of list (furthest to the left)
+#         self.size += 1
+#         self.storage.add_to_tail(value)
+
+#     def dequeue(self):
+#         # dequeue an item from front of list (furthest to the right)
+#         if self.size > 0:
+#             self.size -= 1
+#             return self.storage.remove_head()
+#         return None
+
