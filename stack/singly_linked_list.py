@@ -22,7 +22,7 @@ class LinkedList:
         # first node in the list
         self.head = None
 
-    def add_to_tail(self, value):
+    def add_to_head(self, value):
         # regardless of if the list is empty or not, we need to wrap the value in a Node
         new_node = Node(value)
         # what if the list is empty?
@@ -39,7 +39,7 @@ class LinkedList:
             # we're at the end of the linked list
             current.set_next(new_node)
 
-    def remove_head(self):
+    def remove_tail(self):
         # what if the list is empty?
         if not self.head:
             return None
