@@ -14,36 +14,38 @@ return elements in Last In First Out order.
 """
 
 # ### Array
-# class Stack:
-#     def __init__(self):
-#         self.size = 0
-#         self.storage = []
-
-#     def __len__(self):
-#         return len(self.storage)
-
-#     def push(self, value):
-#         self.storage.append(value)
-
-#     def pop(self):
-#         if len(self.storage) > 0:
-#             return self.storage.pop()
 
 
-# Linked List
 class Stack:
     def __init__(self):
         self.size = 0
-        self.storage = LinkedList()
+        self.storage = []
 
     def __len__(self):
-        return self.size
+        return len(self.storage)
 
     def push(self, value):
-        self.size += 1
-        self.storage.add_to_head(value)
+        self.storage.append(value)
 
     def pop(self):
-        if self.size > 0:
-            self.size -= 1
-            return self.storage.remove_head()
+        if len(self.storage) > 0:
+            return self.storage.pop()
+
+
+# Linked List
+# class Stack:
+#     def __init__(self):
+#         self.size = 0
+#         self.storage = LinkedList()
+
+#     def __len__(self):
+#         return self.size
+
+#     def push(self, value):
+#         self.size += 1
+#         self.storage.add_to_head(value)
+
+#     def pop(self):
+#         if self.size > 0:
+#             self.size -= 1
+#             return self.storage.remove_head()
