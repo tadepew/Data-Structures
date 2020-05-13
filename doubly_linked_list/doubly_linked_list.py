@@ -167,27 +167,40 @@ class DoublyLinkedList:
             self.add_to_head(node.value)  # inserts node in front
             self.length -= 1
 
+            # current_node = node
+            # node.delete()
+            # self.length -= 1
+            # self.add_to_head(current_node.value)
+
     """Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List."""
 
     def move_to_end(self, node):
 
-        if not self.head and not self.tail:
-            return None
+        # if not self.head and not self.tail:
+        #     return None
 
-        else:
+        # else:
 
-            current = self.head
+        #     current = self.head
 
-            while current is not None:
-                if current == node:
-                    break
-                current = current.next
+        #     while current is not None:
+        #         if current == node:
+        #             break
+        #         current = current.next
 
-            print("current", current.value)
-            current.delete()
-            self.add_to_tail(node.value)
-            self.length -= 1
+        #     print(f"current", current.value)
+        #     current.delete()  # WHY won't this delete?!
+        #     self.add_to_tail(node.value)
+        #     self.length -= 1
+
+        current_node = node
+        if current_node.prev is None:
+            self.head = current_node.next
+
+        node.delete()
+        self.length -= 1
+        self.add_to_tail(current_node.value)
 
     """Removes a node from the list and handles cases where
     the node was the head or the tail"""
@@ -197,8 +210,17 @@ class DoublyLinkedList:
         if not self.head and not self.tail:
             return None
 
+        elif node.prev is None and node.next is None:
+            self.head = None
+            self.tail = None
+            self.length -= 1
+
         elif not node.prev:
-            self.remove_from_head()
+            self.head = node.next
+            node.delete()
+            self.length -= 1
+            return node.value
+            # self.remove_from_head() not working with line 140 in test
 
         elif not node.next:
             self.remove_from_tail()
@@ -206,11 +228,20 @@ class DoublyLinkedList:
         else:
             node.delete()
             self.length -= 1
+            return node.value
 
     """Returns the highest value currently in the list"""
 
     def get_max(self):
-        pass
+        current = self.head
+        max_num = current.value
+        while current.next is not None:
+            if max_num < current.next.value:
+                max_num = current.next.value
+
+            current = current.next
+
+        return max_num
 
     def print_list(self):
         tmp = self.head
@@ -224,6 +255,7 @@ if __name__ == '__main__':
     ll = DoublyLinkedList()
     ll.add_to_head("A")
     ll.add_to_tail("B")
+    ll.add_to_tail("C")
 
     ll.move_to_end(ll.head)
 
